@@ -1,0 +1,8 @@
+model_name: google/vit-base-patch16-224
+data_dir: data/new
+process_dir: data/processed
+annoy_dir: annoy
+tree_path: annoy/annoy_idx.ann
+n_dims: 768
+n_trees: 10
+similarity_metric: euclidean
