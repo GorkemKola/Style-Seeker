@@ -5,6 +5,7 @@ import torch
 import os
 import yaml
 
+
 def construct():
     with open('config.yml', 'r') as f:
         config = yaml.safe_load(f)
@@ -14,7 +15,7 @@ def construct():
     n_dims = config['n_dims']
     n_trees = config['n_trees']
     annoy_dir = config['annoy_dir']
-    metric = config['similarity_metric'] 
+    metric = config['similarity_metric']
     os.makedirs(annoy_dir, exist_ok=True)
 
     feature_paths = os.listdir(process_dir)
@@ -23,11 +24,10 @@ def construct():
     paths = []
     for i, p in enumerate(feature_paths):
         path = os.path.join(process_dir, p)
-        print(i, path)
         features = torch.load(path)
+        print(p, i)
         annoy_index.add_item(i, features)
         paths.append(p)
-
 
     annoy_index.build(n_trees)
 
@@ -35,9 +35,10 @@ def construct():
 
     with open(os.path.join(annoy_dir, 'image_paths.txt'), 'w') as f:
         for image_path in paths:
-            f.write(f'{image_path}')
+            f.write(f'{image_path}\n')
 
     print('ANNOY tree saved.')
+
 
 def get_similar(tree, query_vector, num_neighbors, image_paths):
     similar_indices = tree.get_nns_by_vector(query_vector, num_neighbors)
@@ -45,4 +46,5 @@ def get_similar(tree, query_vector, num_neighbors, image_paths):
     return similar_image_paths
 
 
-
+if __name__ == "__main__":
+    construct()

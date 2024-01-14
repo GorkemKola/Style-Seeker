@@ -4,7 +4,6 @@ import os
 from PIL import Image
 import torch
 import yaml
-
 with open('config.yml', 'r') as f:
     config = yaml.safe_load(f)
 data_dir = config['data_dir']
@@ -31,7 +30,8 @@ if __name__ == '__main__':
         
         # 5. Access the extracted vector
         features = features.hidden_states[-1]
-        features = torch.sum(features, dim=(1)).squeeze(0)
+        features = features[0, 0, :]
+        print(features.shape)
         out_path = os.path.join(process_dir, p)
 
         torch.save(features, out_path)
