@@ -8,4 +8,4 @@
 - These extracted features will be used to find K (how many wanted) similar products using ANNoy (Approximiate Nearest Neighbors) algorithm (Time Complexity: O(logN))
 - The similar products with the features will be returned to the user.
 
-- The project is 75% finished. 
+- The project is on its final form. 
