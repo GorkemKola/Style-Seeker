@@ -53,9 +53,6 @@ def evaluation(image_tensor, n_recommend):
     cs1 = np.mean(cosine_similarities, axis=0)
     cs2 = np.mean(cosine_similarities, axis=1)
     coef = np.array(correlation_coefficients)
-    print(cosine_similarities == correlation_coefficients)
-    print(cosine_similarities)
-    print(correlation_coefficients)
     plt.figure(figsize=(10, 8))
     sns.heatmap(coef, annot=True, cmap='coolwarm', fmt=".2f", linewidths=0.5)
     plt.xlabel('Recommendation Vectors')
@@ -70,7 +67,7 @@ def evaluation(image_tensor, n_recommend):
     plt.ylabel('Query Vectors')
     plt.title('Cosine Similarity Matrix Heatmap')
     # Save the heatmap as an image file (e.g., PNG)
-    plt.savefig(f'cosine_similarity_heatmeap{n_recommend-1}.png')
+    plt.savefig(f'cosine_similarity_heatmap{n_recommend-1}.png')
     return cs
 if __name__ == '__main__':
     np.random.seed(42)
